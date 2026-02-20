@@ -1,4 +1,4 @@
-Este projeto é uma ferramenta web simples desenvolvida para o setor de Recursos Humanos da TechSoluções. O objetivo é automatizar o cálculo de reajustes salariais baseados na meritocracia e no cargo de cada colaborador.
+Este projeto é uma ferramenta web simples desenvolvida para a TechSoluções. O objetivo é automatizar o cálculo de reajustes salariais baseados na meritocracia e no cargo de cada colaborador.
 
 Como funciona:
 O sistema recebe o nome, cargo, salário e o histórico de assiduidade do funcionário. Se o colaborador não tiver nenhuma falta ou atraso no ano, ele recebe um aumento percentual automático:
