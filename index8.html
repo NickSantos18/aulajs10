@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Meritocracia - TechSoluções</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: radial-gradient(black, rgb(85, 83, 83),gray);
+  color: white;
+}
+h1{
+    margin-left: 25%;
+    
+}
+.container {
+  display: flex;
+  gap: 20px;
+  border-radius: 10px;
+  color: black;
+}
+
+.formulario, .historico {
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  align-items: center;
+}
+
+h2 {
+  margin-top: 0;
+  margin-left: 25%;
+}
+
+input, select, button {
+  width: 70%;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 25px;
+  border: 2px solid black;
+}
+select{
+    width: 415px;
+    border: 2px solid black;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: 1ms;
+}
+
+button:hover {
+  background-color: #ffffff;
+  border: 3px solid rgb(0, 56, 154);
+  color: #007bff;
+}
+
+#resultado {
+  white-space: pre-line;
+  font-size: 16px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Sistema de Avaliação - TechSoluções</h1>
+
+<div class="container">
+
+  <!-- FORMULÁRIO -->
+  <div class="formulario">
+    <h2>Dados do Colaborador</h2>
+    <label><strong>Nome:</strong></label>
+    <br>
+    <input type="text" id="nome">
+    <br>
+    <label><strong>Cargo:</strong></label>
+    <br>
+    <select id="cargo">
+      <option value="aprendiz">Aprendiz</option>
+      <option value="analista">Analista de TI</option>
+      <option value="gerente">Gerente de TI</option>
+      <option value="diretor">Diretor de TI</option>
+    </select>
+    <br>
+    
+    <label><strong>Salário Atual (R$):</strong></label>
+    <br>
+    <input type="number" id="salario">
+    <br>
+    <label><strong>Faltas nesse ano:</strong></label>
+    <br>
+    <input type="number" id="faltas">
+    <br>
+    <label><strong>Atrasos nesse ano:</strong></label>
+    <input type="number" id="atrasos">
+    <br>
+    <button onclick="avaliarFuncionario()">Avaliar Reajuste</button>
+  </div>
+
+  <!-- HISTÓRICO -->
+  <div class="historico">
+    <h2>Histórico de Avaliação</h2>
+    <div id="resultado">Nenhuma avaliação realizada.</div>
+  </div>
+
+</div>
+
+<script>
+function avaliarFuncionario() {
+  // Captura dos dados
+  let nome = document.getElementById("nome").value;
+  let cargo = document.getElementById("cargo").value;
+  let salario = parseFloat(document.getElementById("salario").value);
+  let faltas = parseInt(document.getElementById("faltas").value);
+  let atrasos = parseInt(document.getElementById("atrasos").value);
+
+  let percentual = 0;
+
+  // Cálculo por cargo
+  if (cargo === "aprendiz") {
+    percentual = 0;
+  } else if (cargo === "analista") {
+    percentual = 0.10;
+  } else if (cargo === "gerente") {
+    percentual = 0.15;
+  } else if (cargo === "diretor") {
+    percentual = 0.20;
+  }
+
+  let mensagem = "";
+
+  // Critério de mérito (operador lógico &&)
+  if (faltas === 0 && atrasos === 0) {
+
+    let aumento = salario * percentual;
+    let novoSalario = salario + aumento;
+
+    mensagem = `
+Funcionário: ${nome}
+Cargo: ${cargo.toUpperCase()}
+
+✅ Reajuste aprovado!
+
+Percentual aplicado: ${(percentual * 100).toFixed(0)}%
+Valor do aumento: R$ ${aumento.toFixed(2)}
+Novo salário: R$ ${novoSalario.toFixed(2)}
+`;
+
+  } else {
+
+    mensagem = `
+Funcionário: ${nome}
+Cargo: ${cargo.toUpperCase()}
+
+❌ Reajuste bloqueado!
+
+Motivo: Registro de faltas ou atrasos.
+Por favor, procure o RH para orientação.
+`;
+
+  }
+
+  document.getElementById("resultado").innerText = mensagem;
+}
+</script>
+
+</body>
+</html>
